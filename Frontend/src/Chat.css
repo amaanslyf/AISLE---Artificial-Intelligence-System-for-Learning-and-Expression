@@ -1,0 +1,101 @@
+.chats {
+  flex-grow: 1; /* Takes up all available vertical space */
+  overflow-y: auto; /* Makes the chat history scrollable */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between messages */
+}
+
+/* --- Initial "Start a New Chat" Message --- */
+.chatHeader {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+  margin-top: 200px; 
+  font-size: 2rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* --- Base styles for both user and GPT message containers --- */
+.userDiv, .gptDiv {
+  max-width: 75%;
+  padding: 15px 20px;
+  border-radius: 20px;
+  line-height: 1.6;
+  width: fit-content; /* Shrink-wrap the content */
+}
+
+/* --- User Message Bubble --- */
+.userDiv {
+    font-family: 'Times New Roman', Times, serif;
+  align-self: flex-end; /* Aligns to the right */
+  background: rgb(246, 247, 248); /* A subtle blue tint for user */
+  border: 1px solid rgba(137, 240, 183, 0.3);
+  border-top-right-radius: 5px; /* "Tails" on the bubbles */
+}
+
+.userMessage {
+  margin: 0;
+}
+
+/* --- GPT Message Bubble --- */
+.gptDiv {
+  font-family: 'Times New Roman', Times, serif;
+  align-self: flex-start; /* Aligns to the left */
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 5px; /* "Tails" on the bubbles */
+}
+
+/* --- Styling for ReactMarkdown Content --- */
+.gptDiv p {
+  margin: 0;
+}
+
+.gptDiv ul, .gptDiv ol {
+  padding-left: 25px; /* Indent lists */
+}
+
+/* Code block styling */
+.gptDiv pre {
+  background: rgba(0, 0, 0, 0.178); /* Darker glass for code */
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto; /* Allow horizontal scrolling for long code lines */
+}
+
+/* Ensure inline code and code blocks use a monospace font */
+.gptDiv code {
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+/* Custom scrollbar for the chat history */
+.chats::-webkit-scrollbar {
+  width: 6px;
+}
+.chats::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+.chats::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- 📱 Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .chats {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
+
+  .chatHeader {
+    margin-top: 40%; /* Use percentage for better vertical centering */
+    font-size: 1.5rem; /* Make the header text smaller */
+  }
+
+  .userDiv, .gptDiv {
+    max-width: 85%; /* Allow bubbles to use more of the screen width */
+    padding: 12px 15px; /* Slightly reduce padding inside bubbles */
+  }
+}
