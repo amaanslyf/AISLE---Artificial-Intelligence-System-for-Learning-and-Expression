@@ -5,20 +5,6 @@ import getOpenAIAPIResponse from "../utils/groqapi.js";
 
 const router = express.Router();
 
-router.post("/test",async (req, res) => {
-    try{
-        const thread = new Thread({
-            threadId: "xyz",
-            title: "New Chat",
-            
-        })
-        const response= await thread.save();
-        res.send(response);
-    }catch(error){
-        console.log(error);
-        res.status(500).json({error:"Failed to save in db"});
-        }
-    });
 
 router.get("/thread" ,async (req, res)=>{
     try{
