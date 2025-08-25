@@ -1,87 +1,143 @@
 .sidebar {
-    background-color: #e7e0e0;
-    color: #b4b4b4;
-    height: 100vh;
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  /* Applying the core glass effect */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-right: 1px solid rgb(17, 17, 17); /* Border on the right for separation */
+  border-bottom: 1px solid rgb(17, 17, 17);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  margin-right: 20px;
+
+  /* Layout & Sizing */
+  width: 280px;
+  height: calc(100vh - 40px); /* Fill height minus parent padding */
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  gap: 20px; /* Space between the button, history, and sign */
 }
 
+/* --- New Chat Button --- */
+.sidebar > button {
+  background: rgb(53, 5, 185);
+  color: #f5f2f2;
+  border: 1px solid rgba(255, 255, 255, 0.822);
+  border-radius: 12px;
+  padding: 10px 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  
+  /* Flex to align logo and icon */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
 
-button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: transparent;
-    border: solid 0.5px rgba(255, 255, 255, 0.5);
-    cursor: pointer;
+.sidebar > button:hover {
+  background: rgb(14, 1, 1);
+  color: #fcf8f8;
 }
 
 .logo {
-    height: 25px;
-    width: 25px;
-    background-color: #fff;
-    border-radius: 50%;
-    object-fit: cover;
+  height: 28px;
+  width: auto;
+  filter: invert(1); /* Invert the logo color if it's black */
 }
 
-button span {
-    font-size: 20px;
-}
-
-button:hover {
-    background-color: rgba(180, 180, 180, 0.05);
-}
-
+/* --- History List --- */
 .history {
-    margin: 10px;
-    padding: 10px;
-    height: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Takes up available space */
+  overflow-y: auto; /* Adds scrollbar if content overflows */
 }
 
+/* Custom scrollbar for a modern look */
+.history::-webkit-scrollbar {
+  width: 6px;
+}
+.history::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+.history::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Individual History Item --- */
 .history li {
-    list-style-type: none;
-    cursor: pointer;
-    padding: 2px 5px;
-    margin-bottom: 0.3rem;
-    font-size: 14px;
-    border: solid 10px transparent;
-    position: relative;
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ... for long text */
+
+  /* Flex to align title and trash icon */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .history li:hover {
-    background-color: rgba(180, 180, 180, 0.05);
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.438);
 }
 
+/* --- Active/Highlighted Chat --- */
+.history li.highlighted {
+  background: rgba(10, 0, 0, 0.274);
+  color: #f5f2f2;
+  font-weight: 600;
+}
+
+/* Trash icon styling */
+.history li i.fa-trash {
+  color: #e0e0e0;
+  opacity: 0.6; /* Less prominent by default */
+  transition: opacity 0.2s ease, color 0.2s ease;
+  padding: 5px; /* Increase clickable area */
+}
+
+.history li:hover i.fa-trash {
+  opacity: 1; /* Fully visible on hover */
+}
+
+.history li i.fa-trash:hover {
+  color: #ff8a8a; /* Highlight color for deletion */
+}
+
+/* --- Signature Footer --- */
 .sign {
-    padding: 10px;
-    margin: 10px;
-    font-size: 14px;
-    text-align: center;
-    border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+  margin-top: auto; /* Pushes to the bottom */
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
 }
 
-.fa-trash {
-    opacity: 0;
-    position: absolute;
-    right: 0;
+.sign p {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 0;
 }
 
-.history li:hover .fa-trash {
-    opacity: 1;
-    color: #fff;
-}
+/* --- 📱 Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Take up full width */
+    height: auto; /* Adjust height based on content */
+    margin-right: 0; /* Remove side margin */
+    margin-bottom: 15px; /* Add space below for the stacked chat window */
+    border-right: 1px solid rgb(17, 17, 17); /* Keep border consistent */
+  }
 
-.fa-trash:hover {
-    color: #f87171 !important;
-}
-
-.highlighted {
-    background-color: rgba(180, 180, 180, 0.05);
-    border-radius: 10px;
+  .history {
+    flex-grow: 0; /* Disable flex-grow in an auto-height container */
+    max-height: 25vh; /* Limit the height to 25% of the viewport height */
+  }
 }
