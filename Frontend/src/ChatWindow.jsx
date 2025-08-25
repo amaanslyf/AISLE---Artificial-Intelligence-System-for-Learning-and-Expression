@@ -3,6 +3,7 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect } from "react";
 import {RingLoader} from "react-spinners";
+import logo from "./assets/AISLE.png";
 
 function ChatWindow() {
     const {prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat} = useContext(MyContext);
@@ -27,6 +28,7 @@ function ChatWindow() {
 
         try {
             const API_URL = import.meta.env.VITE_API_URL;
+            // const localhost = "http://localhost:8080"
             const response = await fetch(`${API_URL}/api/chat`, options);
             const res = await response.json();
             console.log(res);
@@ -60,7 +62,7 @@ function ChatWindow() {
     return (
         <div className="chatWindow">
             <div className="navbar">
-                <span><img src="src/assets/AISLE.png" alt="AISLE logo" className="logo"></img>AISLE </span>
+                <span><img src={logo} alt="AISLE logo" className="logo"></img>AISLE </span>
                 
             </div>
             
