@@ -1,125 +1,128 @@
 .chatWindow {
-    background-color: #212121;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
+  flex-grow: 1; /* Allows the window to take up the remaining space */
+  height: calc(100vh - 40px); /* Fill height minus parent padding */
+  border-radius: 20px;
+  
+  /* Applying the core glass effect */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.938), rgba(47, 47, 48, 0.534));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.507);
+
+  /* Layout for internal elements (navbar, chat, input) */
+  display: flex;
+  flex-direction: column;
+  position: relative; /* For positioning the loading spinner */
 }
 
-/* navbar */
-
+/* --- Top Navigation Bar --- */
 .navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(19, 1, 1, 0.233);
 }
 
 .navbar span {
-    margin: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.308);
 }
 
-.userIconDiv {
-    margin: 1rem 2rem;
-}
-
-.userIcon {
-    background-color: #339cff;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-/* chat input */
+/* --- Chat Input Area at the Bottom --- */
 .chatInput {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding: 20px;
+  margin-top: auto; /* Pushes the input to the bottom */
 }
 
+/* --- Input Box Container --- */
 .inputBox {
-    width: 100%;
-    position: relative;
-    max-width: 700px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 5px; /* Padding inside the border */
+  border-radius: 15px; /* Rounded corners for the container */
+  
+  /* Glass effect for the input box itself */
+  background: rgb(0, 0, 0);
+  border: 1px solid rgba(26, 25, 25, 0.76);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.644);
 }
 
-input {
-    width: 100%;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    font-size: 0.8rem;
-    border-radius: 14px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
-                rgba(0, 0, 0, 0.05) 0 -12px 30px,
-                rgba(0, 0, 0, 0.05) 0 4px 6px,
-                rgba(0, 0, 0, 0.05) 0 12px 3px,
-                rgba(0, 0, 0, 0.05) 0 -3px 5px;
+/* --- Text Input Field --- */
+.inputBox input {
+  flex-grow: 1; /* Takes up all available space */
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 12px 15px;
+  font-size: 1rem;
+  color: #ffffff; /* Ensure text color is bright */
 }
 
-input:focus {
-    outline: none;
+/* Style for the placeholder text */
+.inputBox input::placeholder {
+  color: rgba(255, 252, 252, 0.452);
 }
 
+/* --- Submit Button --- */
 #submit {
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-    font-size: 20px;
-    position: absolute;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-right: 5px;
 }
 
-#submit i:hover {
-    color: #fff;
+#submit:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
+#submit i {
+  font-size: 1.1rem;
+}
+
+/* --- Disclaimer Info Text --- */
 .info {
-    font-size: 0.8rem;
-    padding: 0.5rem;
-    color: #b4b4b4;
+  text-align: center;
+  font-size: 0.75rem;
+  margin-top: 15px;
+  opacity: 0.6;
 }
 
-/* dropdown css */
-
-.dropDown {
-    position: absolute;
-    top: 4rem;
-    right: 4rem;
-    width: 150px;
-
-    background-color: #323232;
-    padding: 0.3rem 0.5rem;
-    border-radius: 6px;
-    text-align: left;
-    z-index: 1000;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+/* --- Loading Spinner Positioning --- */
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.dropDownItem {
-    font-size: 0.9rem;
-    margin: 0.3rem 0rem;
-    padding: 0.5rem 0.2rem;
-    cursor: pointer;
-}
+/* --- 📱 Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .chatWindow {
+    /* On mobile, the window might be part of a stacked layout.
+       This ensures it fits correctly. */
+    height: 100%; 
+    border-radius: 0; /* Full screen might not need rounded corners */
+  }
 
+  .navbar {
+    padding: 15px; /* Reduce padding to save space */
+  }
 
-.dropDownItem:hover {
-    background-color: rgba(180, 180, 180, 0.1);
-    border-radius: 6px;
+  .navbar span {
+    font-size: 1.2rem; /* Make the title slightly smaller */
+  }
+
+  .chatInput {
+    padding: 10px; /* Reduce padding on the main input area */
+  }
+
+  .info {
+    font-size: 0.65rem; /* Make the small text even smaller */
+  }
 }
