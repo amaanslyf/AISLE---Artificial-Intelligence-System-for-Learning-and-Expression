@@ -5,11 +5,10 @@ import {v1 as uuidv1} from "uuid";
 
 function Sidebar() {
     const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
-
+    const API_URL = import.meta.env.VITE_API_URL;
+    // const localhost = "http://localhost:8080"
     const getAllThreads = async () => {
         try {
-            const API_URL = import.meta.env.VITE_API_URL;
-            // const localhost = "http://localhost:8080"
             const response = await fetch(`${API_URL}/api/thread`);
             const res = await response.json();
             const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}));
